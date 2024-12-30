@@ -3,7 +3,7 @@ export type ErrorType = {
   message: string;
 };
 
-export const errors: { [key: string]: ErrorType } = Object.freeze({
+export const ERRORS: { [key: string]: ErrorType } = Object.freeze({
   BadRequestError: { code: 400, message: 'Invalid request' },
   UnauthorizedError: { code: 401, message: 'Unauthorized' },
   ForbiddenError: { code: 403, message: 'Forbidden' },

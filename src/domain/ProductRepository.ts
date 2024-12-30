@@ -1,4 +1,4 @@
-import { Product } from '../types/Product';
+import { Product } from '../types/interfaces';
 import { ResultType } from '../types/ResultType';
 
 export type FindProductTypes = ResultType<Product>;

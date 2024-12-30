@@ -1,6 +1,6 @@
 import { ProductRepositoryInterface } from '../../domain/ProductRepository';
 import { productService } from '../../domain/productService';
-import { errors } from '../../responses/errors';
+import { ERRORS } from '../../responses/errors';
 
 export const findProductByIdQuery = async (
   { productId }: { productId: number },
@@ -9,10 +9,10 @@ export const findProductByIdQuery = async (
   try {
     const product = await productService.findProductById({ productId }, { productRepository });
     if (!product) {
-      return { success: false, error: errors.NotFoundError };
+      return { success: false, error: ERRORS.NotFoundError };
     }
     return { success: true, data: product };
   } catch {
-    return { success: false, error: errors.UnexpectedError };
+    return { success: false, error: ERRORS.UnexpectedError };
   }
 };

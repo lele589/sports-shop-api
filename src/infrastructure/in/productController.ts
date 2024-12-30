@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Product } from '../../types/Product';
+import { Product } from '../../types/interfaces';
 import { findProductByIdQuery } from '../../application/queries/findProductByIdQuery';
 import { productRepository } from '../out/repositories/productRepository';
 import { createProductCommand } from '../../application/commands/createProductCommand';

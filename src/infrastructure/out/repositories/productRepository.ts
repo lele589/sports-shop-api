@@ -1,6 +1,6 @@
 import { CreateProductTypes, FindProductTypes } from '../../../domain/ProductRepository';
-import { errors } from '../../../responses/errors';
-import { Product } from '../../../types/Product';
+import { ERRORS } from '../../../responses/errors';
+import { Product } from '../../../types/interfaces';
 import db from '../clients/db';
 import { getLastInsertId } from './utils';
 
@@ -12,7 +12,7 @@ const findProduct = async ({ id }: { id: Product['id'] }): Promise<FindProductTy
       .first();
 
     if (!product) {
-      return { success: false, error: errors.NotFoundError };
+      return { success: false, error: ERRORS.NotFoundError };
     }
 
     const parts = await db('parts')
@@ -40,7 +40,7 @@ const findProduct = async ({ id }: { id: Product['id'] }): Promise<FindProductTy
 
     return { success: true, data: { ...product, parts, dependencies } };
   } catch {
-    return { success: false, error: errors.InternalServerError };
+    return { success: false, error: ERRORS.InternalServerError };
   }
 };
 
@@ -48,7 +48,7 @@ const createProduct = async ({ product }: { product: Product }): Promise<CreateP
   try {
     const existingProduct = await db('products').select('*').where({ name: product.name }).first();
     if (existingProduct) {
-      return { success: false, error: errors.ConflictError };
+      return { success: false, error: ERRORS.ConflictError };
     }
 
     await db.transaction(async (trx) => {
@@ -91,7 +91,7 @@ const createProduct = async ({ product }: { product: Product }): Promise<CreateP
 
     return { success: true, data: product };
   } catch {
-    return { success: false, error: errors.InternalServerError };
+    return { success: false, error: ERRORS.InternalServerError };
   }
 };
 

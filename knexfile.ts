@@ -1,6 +1,7 @@
 import { Knex } from 'knex';
 import path from 'path';
 
+// It's needed to create different configurations for each environment
 const config: Knex.Config = {
   client: 'sqlite3',
   connection: {
