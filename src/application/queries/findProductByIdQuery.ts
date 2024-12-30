@@ -3,7 +3,7 @@ import { productService } from '../../domain/productService';
 import { errors } from '../../responses/errors';
 
 export const findProductByIdQuery = async (
-  { productId }: { productId: string },
+  { productId }: { productId: number },
   { productRepository }: { productRepository: ProductRepositoryInterface },
 ) => {
   try {

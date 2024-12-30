@@ -4,7 +4,7 @@ enum ProductType {
 }
 
 export interface Product {
-  id: string;
+  id: number;
   name: string;
   description: string;
   type: ProductType;
@@ -17,19 +17,19 @@ export interface Product {
 }
 
 interface Part {
-  id: string;
+  id: number;
   name: string;
   options: PartOption[];
 }
 
 interface PartOption {
-  id: string;
+  id: number;
   name: string;
   additionalPrice: number;
   stock: number;
 }
 
 interface OptionsDependencies {
-  optionId: string;
-  disallowedOptionIds: string[];
+  optionId: number;
+  disallowedOptionIds: number[];
 }

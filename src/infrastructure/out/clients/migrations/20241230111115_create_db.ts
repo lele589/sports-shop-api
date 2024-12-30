@@ -23,18 +23,18 @@ export async function up(knex: Knex): Promise<void> {
       table.float('stock');
     })
     .createTable('product_parts', (table) => {
-      table.string('productId').references('id').inTable('products');
-      table.string('partId').references('id').inTable('parts');
+      table.float('productId').references('id').inTable('products');
+      table.float('partId').references('id').inTable('parts');
       table.primary(['productId', 'partId']);
     })
     .createTable('part_options', (table) => {
-      table.string('partId').references('id').inTable('parts');
-      table.string('optionId').references('id').inTable('options');
+      table.float('partId').references('id').inTable('parts');
+      table.float('optionId').references('id').inTable('options');
       table.primary(['partId', 'optionId']);
     })
     .createTable('dependencies', (table) => {
-      table.string('optionId').references('id').inTable('options');
-      table.string('disallowedOptionId').references('id').inTable('options');
+      table.float('optionId').references('id').inTable('options');
+      table.float('disallowedOptionId').references('id').inTable('options');
       table.primary(['optionId', 'disallowedOptionId']);
     });
 }
