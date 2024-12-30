@@ -1,4 +1,7 @@
-type ProductType = 'bicycle' | 'other';
+enum ProductType {
+  Bicycle = 'bicycle',
+  Other = 'other',
+}
 
 export interface Product {
   id: string;
@@ -6,7 +9,7 @@ export interface Product {
   description: string;
   type: ProductType;
   basePrice: number;
-  inStock: boolean;
+  stock: number;
   creationDate: Date;
   parts: Part[];
   imageUrl: string;
@@ -23,7 +26,7 @@ interface PartOption {
   id: string;
   name: string;
   additionalPrice: number;
-  available: boolean;
+  stock: number;
 }
 
 interface OptionsDependencies {

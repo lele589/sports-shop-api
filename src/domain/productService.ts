@@ -7,6 +7,9 @@ type FindProductByIdType = (
   { productId }: { productId: Product['id'] },
   { productRepository }: { productRepository: ProductRepositoryInterface },
 ) => Promise<ResultType<Product>>;
+
+type CreateProductType = (
+  { product }: { product: Product },
   { productRepository }: { productRepository: ProductRepositoryInterface },
 ) => Promise<ResultType<Product>>;
 
@@ -15,6 +18,11 @@ const findProductById: FindProductByIdType = ({ productId }, { productRepository
   return productRepository.findProduct({ id: productId });
 };
 
+const createProduct: CreateProductType = ({ product }, { productRepository }) => {
+  return productRepository.createProduct({ product });
+};
+
 export const productService = {
   findProductById,
+  createProduct,
 };

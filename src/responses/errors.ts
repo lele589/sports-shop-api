@@ -9,5 +9,6 @@ export const errors: { [key: string]: ErrorType } = Object.freeze({
   ForbiddenError: { code: 403, message: 'Forbidden' },
   NotFoundError: { code: 404, message: 'Not found' },
   TimeoutError: { code: 408, message: 'Timeout' },
+  ConflictError: { code: 409, message: 'Conflict: Resource already exists' },
   UnexpectedError: { code: 500, message: 'Unexpected Error' },
 });

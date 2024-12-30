@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import { Product } from '../../types/Product';
 import { findProductByIdQuery } from '../../application/queries/findProductByIdQuery';
 import { productRepository } from '../out/repositories/productRepository';
+import { createProductCommand } from '../../application/commands/createProductCommand';
+import { createProductSchema } from './contracts/createProductSchema';
 import { findProductByIdSchema } from './contracts/findProductSchema';
 
 const findProductById = async (
@@ -28,6 +30,28 @@ const findProductById = async (
   }
 };
 
+const createProduct = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { error } = createProductSchema.validate(req.body);
+
+    if (error) {
+      res.status(422).json({ error: error as Error });
+    }
+
+    const productData = req.body;
+    const result = await createProductCommand({ product: productData }, { productRepository });
+
+    if (result.error) {
+      res.status(result.error.code).json({ message: result.error.message });
+    } else {
+      res.status(201).json(result.data);
+    }
+  } catch (error) {
+    res.status(400).json({ message: (error as Error).message });
+  }
+};
+
 export const productController = {
   findProductById,
+  createProduct,
 };

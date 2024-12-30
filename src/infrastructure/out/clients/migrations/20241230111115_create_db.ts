@@ -3,24 +3,24 @@ import type { Knex } from 'knex';
 export async function up(knex: Knex): Promise<void> {
   return knex.schema
     .createTable('products', (table) => {
-      table.string('id').primary();
+      table.increments('id').primary();
       table.string('name').notNullable();
       table.text('description');
       table.string('type');
       table.float('basePrice');
-      table.boolean('inStock');
+      table.float('stock');
       table.string('imageUrl');
       table.date('creationDate');
     })
     .createTable('parts', (table) => {
-      table.string('id').primary();
+      table.increments('id').primary();
       table.string('name').notNullable();
     })
     .createTable('options', (table) => {
-      table.string('id').primary();
+      table.increments('id').primary();
       table.string('name').notNullable();
       table.float('additionalPrice');
-      table.boolean('available');
+      table.float('stock');
     })
     .createTable('product_parts', (table) => {
       table.string('productId').references('id').inTable('products');
