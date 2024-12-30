@@ -6,27 +6,37 @@ import { getLastInsertId } from './utils';
 
 const findProduct = async ({ id }: { id: Product['id'] }): Promise<FindProductTypes> => {
   try {
-    const product = await db('products').select('*').where({ id }).first();
+    const product = await db('products')
+      .select('id', 'name', 'description', 'type', 'basePrice', 'stock', 'imageUrl')
+      .where({ id })
+      .first();
 
     if (!product) {
       return { success: false, error: errors.NotFoundError };
     }
 
     const parts = await db('parts')
-      .select('*')
+      .select('id', 'name')
       .innerJoin('product_parts', 'parts.id', 'product_parts.partId')
       .where('product_parts.productId', id);
 
+    const dependencies = await db('dependencies').select('optionId', 'disallowedOptionId');
+    const filteredDependencies = [];
+
     for (const part of parts) {
       const options = await db('options')
-        .select('*')
+        .select('id', 'name', 'additionalPrice', 'stock')
         .innerJoin('part_options', 'options.id', 'part_options.optionId')
         .where('part_options.partId', part.id);
 
       part.options = options;
-    }
 
-    const dependencies = await db('dependencies').select('*').where({ productId: id });
+      for (const option of options) {
+        filteredDependencies.push(
+          dependencies.filter((dependency) => dependency.optionId === option.id),
+        );
+      }
+    }
 
     return { success: true, data: { ...product, parts, dependencies } };
   } catch {
@@ -49,7 +59,7 @@ const createProduct = async ({ product }: { product: Product }): Promise<CreateP
         basePrice: product.basePrice,
         stock: product.stock,
         imageUrl: product.imageUrl,
-        creationDate: new Date(),
+        creationDate: new Date().toISOString(),
       });
 
       const createdProductId = await getLastInsertId(trx);

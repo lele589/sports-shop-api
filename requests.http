@@ -1,0 +1,102 @@
+### Get single product
+GET http://localhost:3000/api/product/1
+
+### Create product
+POST http://localhost:3000/api/product
+Content-Type: application/json
+
+{
+  "name": "Mountain Bike B-125",
+  "description": "High-performance mountain bike for challenging terrains.",
+  "type": "Bicycle",
+  "basePrice": 500,
+  "stock": 100,
+  "imageUrl": "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/db172216615967.562aededbf170.jpg",
+  "parts": [
+    {
+      "name": "Frame type",
+      "options": [
+        {
+          "name": "Full-suspension",
+          "additionalPrice": 130,
+          "stock": 10
+        },
+        {
+          "name": "Diamond",
+          "additionalPrice": 100,
+          "stock": 5
+        }
+      ]
+    },
+    {
+      "name": "Frame finish",
+      "options": [
+        {
+          "name": "Matte",
+          "additionalPrice": 30,
+          "stock": 20
+        },
+        {
+          "name": "Shiny",
+          "additionalPrice": 30,
+          "stock": 15
+        }
+      ]
+    },
+    {
+      "name": "Wheels",
+      "options": [
+        {
+          "name": "Mountain wheels",
+          "additionalPrice": 80,
+          "stock": 7
+        },
+        {
+          "name": "Road wheels",
+          "additionalPrice": 70,
+          "stock": 12
+        },
+        {
+          "name": "Fat bike wheels",
+          "additionalPrice": 100,
+          "stock": 3
+        }
+      ]
+    },
+    {
+      "name": "Rim color",
+      "options": [
+        {
+          "name": "Red",
+          "additionalPrice": 10,
+          "stock": 10
+        },
+        {
+          "name": "Black",
+          "additionalPrice": 10,
+          "stock": 5
+        },
+        {
+          "name": "Blue",
+          "additionalPrice": 10,
+          "stock": 5
+        }
+      ]
+    },
+    {
+      "name": "Chain",
+      "options": [
+        {
+          "name": "Single-speed",
+          "additionalPrice": 20,
+          "stock": 10
+        },
+        {
+          "name": "8-speed",
+          "additionalPrice": 20,
+          "stock": 5
+        }
+      ]
+    }
+  ]
+}
