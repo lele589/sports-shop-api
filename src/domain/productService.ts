@@ -2,18 +2,16 @@ import { Product } from '../types/Product';
 import { ResultType } from '../types/ResultType';
 import { ProductRepositoryInterface } from './ProductRepository';
 
+// Types
 type FindProductByIdType = (
-  { productId, withDetails }: { productId: Product['id']; withDetails: boolean },
+  { productId }: { productId: Product['id'] },
+  { productRepository }: { productRepository: ProductRepositoryInterface },
+) => Promise<ResultType<Product>>;
   { productRepository }: { productRepository: ProductRepositoryInterface },
 ) => Promise<ResultType<Product>>;
 
-const findProductById: FindProductByIdType = (
-  { productId, withDetails },
-  { productRepository },
-) => {
-  if (withDetails) {
-    return productRepository.findProductWithDetails({ id: productId });
-  }
+// Methods
+const findProductById: FindProductByIdType = ({ productId }, { productRepository }) => {
   return productRepository.findProduct({ id: productId });
 };
 

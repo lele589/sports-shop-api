@@ -1,4 +1,4 @@
-export type ProductType = 'Bicycle' | 'OtherType';
+type ProductType = 'bicycle' | 'other';
 
 export interface Product {
   id: string;
@@ -7,6 +7,26 @@ export interface Product {
   type: ProductType;
   basePrice: number;
   inStock: boolean;
-  imageUrl: string;
   creationDate: Date;
+  parts: Part[];
+  imageUrl: string;
+  dependencies: OptionsDependencies[];
+}
+
+interface Part {
+  id: string;
+  name: string;
+  options: PartOption[];
+}
+
+interface PartOption {
+  id: string;
+  name: string;
+  additionalPrice: number;
+  available: boolean;
+}
+
+interface OptionsDependencies {
+  optionId: string;
+  disallowedOptionIds: string[];
 }

@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
 import { Product } from '../../types/Product';
-import { findProductDetailsByIdQuery } from '../../application/queries/findProductDetailsByIdQuery';
+import { findProductByIdQuery } from '../../application/queries/findProductByIdQuery';
 import { productRepository } from '../out/repositories/productRepository';
 
-const findProductDetailsById = async (
+const findProductById = async (
   req: Request<{ id: Product['id'] }>,
   res: Response,
 ): Promise<void> => {
   try {
     const productId = req.params.id;
-    const result = await findProductDetailsByIdQuery({ productId }, { productRepository });
+    const result = await findProductByIdQuery({ productId }, { productRepository });
 
     if (result.error) {
       res.status(result.error.code).json({ message: result.error.message });
@@ -22,5 +22,5 @@ const findProductDetailsById = async (
 };
 
 export const productController = {
-  findProductDetailsById,
+  findProductById,
 };
