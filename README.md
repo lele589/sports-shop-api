@@ -11,8 +11,8 @@ This repository is part of the 'Sports Shop' project, hosted at the repository [
 ### Endpoints
 The endpoints have been created with a Use Case approach, responding to the needs of the current frontend.
 
-- **findProductDetails**: Retrieves the details of a product filtered by its ID. The domain service currently only supports filtering by ID, but it could be extended to accommodate other types of filters.
-- **createProduct**: This endpoint is intended for future use in the admin panel. Currently, it is used to perform a POST request to add an initial example product.
+- `findProductDetails`: Retrieves the details of a product filtered by its ID. The domain service currently only supports filtering by ID, but it could be extended to accommodate other types of filters.
+- `createProduct`: This endpoint is intended for future use in the admin panel. Currently, it is used to perform a POST request to add an initial example product.
 
 ### Migrations
 Currently, migrations handle the database initialization and can be managed through scripts.
@@ -29,7 +29,7 @@ To configure the project from scratch, follow these steps:
    cd sports-shop-api
    ```
 
-2. Run the setup script:
+2. Setup the project:
    ```bash
    npm run setup
    ```
@@ -40,4 +40,20 @@ To configure the project from scratch, follow these steps:
    FRONTEND_URL=http://localhost:5174
    ```
 
-4. Ensure to follow the setup steps for the Frontend repository: [sports-shop](https://github.com/lele589/sports-shop).
+4. Start backend server
+   ```bash
+   npm start
+   ```
+
+4. Ensure to follow the setup steps for the Frontend repository: [Sports Shop](https://github.com/lele589/sports-shop).
+
+> [!NOTE]  
+>If you want to have example data:
+>- Make a POST request with the example JSON provided in the `requests.http` file.
+>- Run the seeds to populate the dependencies table.
+>- Restart the server.
+
+
+
+
+
