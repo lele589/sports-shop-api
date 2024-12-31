@@ -6,11 +6,11 @@ export async function up(knex: Knex): Promise<void> {
       table.increments('id').primary();
       table.string('name').notNullable();
       table.text('description');
-      table.string('type');
-      table.float('basePrice');
-      table.float('stock');
-      table.string('imageUrl');
-      table.date('creationDate');
+      table.string('type').notNullable();
+      table.float('basePrice').notNullable();
+      table.float('stock').notNullable();
+      table.string('imageUrl').notNullable();
+      table.date('creationDate').notNullable();
     })
     .createTable('parts', (table) => {
       table.increments('id').primary();
@@ -19,22 +19,32 @@ export async function up(knex: Knex): Promise<void> {
     .createTable('options', (table) => {
       table.increments('id').primary();
       table.string('name').notNullable();
-      table.float('additionalPrice');
-      table.float('stock');
+      table.float('additionalPrice').notNullable();
+      table.float('stock').notNullable();
     })
     .createTable('product_parts', (table) => {
-      table.float('productId').references('id').inTable('products');
-      table.float('partId').references('id').inTable('parts');
+      table
+        .integer('productId')
+        .unsigned()
+        .references('id')
+        .inTable('products')
+        .onDelete('CASCADE');
+      table.integer('partId').unsigned().references('id').inTable('parts').onDelete('CASCADE');
       table.primary(['productId', 'partId']);
     })
     .createTable('part_options', (table) => {
-      table.float('partId').references('id').inTable('parts');
-      table.float('optionId').references('id').inTable('options');
+      table.integer('partId').unsigned().references('id').inTable('parts').onDelete('CASCADE');
+      table.integer('optionId').unsigned().references('id').inTable('options').onDelete('CASCADE');
       table.primary(['partId', 'optionId']);
     })
     .createTable('dependencies', (table) => {
-      table.float('optionId').references('id').inTable('options');
-      table.float('disallowedOptionId').references('id').inTable('options');
+      table.integer('optionId').unsigned().references('id').inTable('options').onDelete('CASCADE');
+      table
+        .integer('disallowedOptionId')
+        .unsigned()
+        .references('id')
+        .inTable('options')
+        .onDelete('CASCADE');
       table.primary(['optionId', 'disallowedOptionId']);
     });
 }
