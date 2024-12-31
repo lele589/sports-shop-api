@@ -14,7 +14,7 @@ const findProductById = async (
     const { error } = findProductByIdSchema.validate(req.params);
 
     if (error) {
-      res.status(422).json({ error: error as Error });
+      res.status(422).json({ message: (error as Error).message });
     }
 
     const productId = req.params.id;
@@ -35,7 +35,7 @@ const createProduct = async (req: Request, res: Response): Promise<void> => {
     const { error } = createProductSchema.validate(req.body);
 
     if (error) {
-      res.status(422).json({ error: error as Error });
+      res.status(422).json({ message: (error as Error).message });
     }
 
     const productData = req.body;
