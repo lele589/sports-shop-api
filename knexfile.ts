@@ -10,6 +10,9 @@ const config: Knex.Config = {
   migrations: {
     directory: path.join(__dirname, 'src/infrastructure/out/clients/migrations'),
   },
+  seeds: {
+    directory: path.join(__dirname, 'src/infrastructure/out/clients/seeds'),
+  },
   useNullAsDefault: true,
 };
 
