@@ -40,7 +40,7 @@ To configure the project from scratch, follow these steps:
    FRONTEND_URL=http://localhost:5174
    ```
 
-4. Start backend server
+4. Start server
    ```bash
    npm start
    ```
@@ -49,8 +49,8 @@ To configure the project from scratch, follow these steps:
 
 > [!NOTE]  
 >If you want to have example data:
->- Make a POST request with the example JSON provided in the `requests.http` file.
->- Run the seeds to populate the dependencies table.
+>- Make a POST request with the example JSON provided in the `requests.http` file (you can use the REST Client extension for VS Code to simplify this process).
+>- Run the seeds to populate the dependencies table: `npm run seed:run`
 >- Restart the server.
 
 
