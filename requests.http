@@ -74,7 +74,7 @@ Content-Type: application/json
         {
           "name": "Black",
           "additionalPrice": 10,
-          "stock": 5
+          "stock": 0
         },
         {
           "name": "Blue",
