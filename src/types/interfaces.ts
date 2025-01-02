@@ -30,6 +30,6 @@ interface PartOption {
 }
 
 interface OptionsDependencies {
-  optionId: number;
+  optionId: PartOption['id'];
   disallowedOptionIds: number[];
 }

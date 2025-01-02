@@ -1,9 +1,10 @@
 import { ProductRepositoryInterface } from '../../domain/ProductRepository';
 import { productService } from '../../domain/productService';
 import { ERRORS } from '../../responses/errors';
+import { Product } from '../../types/interfaces';
 
 export const findProductByIdQuery = async (
-  { productId }: { productId: number },
+  { productId }: { productId: Product['id'] },
   { productRepository }: { productRepository: ProductRepositoryInterface },
 ) => {
   try {
